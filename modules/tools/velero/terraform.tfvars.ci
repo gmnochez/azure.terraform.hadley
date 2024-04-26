@@ -1,1 +1,0 @@
-velero_storage_settings = { allowed_cidrs = ["1.1.1.1", "2.2.2.2"] }
