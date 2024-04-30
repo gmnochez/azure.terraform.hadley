@@ -6,18 +6,18 @@
 
 locals {
   # Automatically load environment-level variables
-  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
+  global_vars = read_terragrunt_config(find_in_parent_folders("global.hcl"))
 
   # Automatically load site-level variables
-  site_vars = read_terragrunt_config(find_in_parent_folders("site.hcl"))
+  env_vars = read_terragrunt_config(find_in_parent_folders("enviroment.hcl"))
 
   # Extract the variables we need for easy access
-  subscription_id                        = local.env_vars.locals.subscription_id
-  client_id                              = local.env_vars.locals.client_id
-  client_secret                          = local.env_vars.locals.client_secret
-  tenant_id                              = local.env_vars.locals.tenant_id
-  deployment_storage_resource_group_name = local.site_vars.locals.deployment_storage_resource_group_name
-  deployment_storage_account_name        = local.site_vars.locals.deployment_storage_account_name
+  subscription_id                        = local.global_vars.locals.subscription_id
+  client_id                              = local.global_vars.locals.client_id
+  client_secret                          = local.global_vars.locals.client_secret
+  tenant_id                              = local.global_vars.locals.tenant_id
+  deployment_storage_resource_group_name = local.env_vars.locals.deployment_storage_resource_group_name
+  deployment_storage_account_name        = local.env_vars.locals.deployment_storage_account_name
 }
 
 # Generate an Azure provider block
