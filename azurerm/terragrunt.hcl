@@ -43,7 +43,7 @@ remote_state {
     resource_group_name  = local.deployment_storage_resource_group_name
     storage_account_name = local.deployment_storage_account_name
     container_name       = "terraform-state"
-    key                  = "${path_relative_to_include("site")}/terraform.tfstate"
+    key                  = "key_remote_state/terraform.tfstate"
   }
 }
 
