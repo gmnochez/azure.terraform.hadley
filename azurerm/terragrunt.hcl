@@ -6,10 +6,14 @@
 
 locals {
   # Automatically load environment-level variables
-  global_vars = read_terragrunt_config(find_in_parent_folders("global.hcl"))
+  # global_vars = read_terragrunt_config(find_in_parent_folders("global.hcl"))
+  global_vars = read_terragrunt_config("global.hcl")
+
 
   # Automatically load site-level variables
-  env_vars = read_terragrunt_config(find_in_parent_folders("enviroment.hcl"))
+  # env_vars = read_terragrunt_config(find_in_parent_folders("enviroment.hcl"))
+  env_vars = read_terragrunt_config("enviroment.hcl")
+
 
   # Extract the variables we need for easy access
   subscription_id                        = local.global_vars.locals.subscription_id
