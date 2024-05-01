@@ -68,8 +68,8 @@ terraform {
 # Configure root level variables that all resources can inherit. This is especially helpful with multi-account configs
 # where terraform_remote_state data sources are placed directly into the modules.
 inputs = merge(
+  local.global_vars.locals,
   local.env_vars.locals,
-  local.site_vars.locals,
   {
     client_secret = local.client_secret
   }
