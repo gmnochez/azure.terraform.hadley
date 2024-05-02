@@ -18,7 +18,7 @@ locals {
 
 
   # Extract the variables we need for easy access
-  subscription_id                        = local.global_vars.locals.subscription_id
+  subscription_id                        = local.res_vars.locals.subscription_id
   client_id                              = local.global_vars.locals.client_id
   client_secret                          = local.global_vars.locals.client_secret
   tenant_id                              = local.global_vars.locals.tenant_id
