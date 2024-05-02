@@ -12,7 +12,7 @@ locals {
   env_vars = read_terragrunt_config(find_in_parent_folders("enviroment.hcl"))
 
 # Automatically load resource variables
-  res_vars = read_terragrunt_config(find_in_parent_folders("resource.hcl"))
+  res_vars = read_terragrunt_config("resource.hcl")
 
 
 
