@@ -11,6 +11,12 @@ locals {
   # Automatically load site-level variables
   env_vars = read_terragrunt_config(find_in_parent_folders("enviroment.hcl"))
 
+# Automatically load resource variables
+  res_vars = read_terragrunt_config(find_in_parent_folders("resource.hcl"))
+
+
+
+
   # Extract the variables we need for easy access
   subscription_id                        = local.global_vars.locals.subscription_id
   client_id                              = local.global_vars.locals.client_id
@@ -70,6 +76,7 @@ terraform {
 inputs = merge(
   local.global_vars.locals,
   local.env_vars.locals,
+  local.res_vars.locals,
   {
     client_secret = local.client_secret
   }
