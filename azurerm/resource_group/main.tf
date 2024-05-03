@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "default" {
+resource "azurerm_resource_group" "hadley_resource" {
   name     = var.resource_group_name
   location = var.location
 
