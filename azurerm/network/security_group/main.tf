@@ -1,4 +1,4 @@
-resource "azurerm_network_security_group" "app" {
+resource "azurerm_network_security_group" "hadley_resource" {
   name                = var.app_subnet_security_group_name
   location            = var.location
   resource_group_name = var.resource_group_name

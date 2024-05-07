@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "main" {
+resource "azurerm_virtual_network" "hadley_resource" {
   name                = var.main_virtual_network_name
   address_space       = var.main_virtual_network_address_space
   location            = var.location
