@@ -5,7 +5,8 @@ resource "azurerm_resource_group" "hadley_resource" {
   dynamic "tags" {
     for_each = var.tags
     content {
-      tags.value["name_tag"]  = tags.value["value_tag"]
+      name  = tags.value["name_tag"] 
+      value = tags.value["value_tag"]
     }
   }
 }
