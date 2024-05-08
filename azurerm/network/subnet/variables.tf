@@ -9,3 +9,10 @@ variable "app_subnet_address_prefixes" {
   type = set(string)
 }
 
+variable "app_subnet_resource_group_name " {
+  description = "Resorce Group of the network"
+}
+
+variable "app_subnet_virtual_network_name" {
+  description = "Virtual Network Name"
+}
