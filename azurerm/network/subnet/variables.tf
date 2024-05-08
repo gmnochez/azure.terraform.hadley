@@ -9,6 +9,3 @@ variable "app_subnet_address_prefixes" {
   type = set(string)
 }
 
-variable "app_subnet_security_group_name" {
-  description = "App subnet security group name"
-}
