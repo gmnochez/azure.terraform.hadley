@@ -23,3 +23,8 @@ variable "app_subnet_service_endpoints" {
 }
 
 
+variable "tags" {
+  description = "Lista de Tags"
+  type = list(any)
+  default = []
+}

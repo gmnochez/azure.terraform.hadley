@@ -26,5 +26,11 @@ variable "ddos_protection_plan_id" {
   
 }
 
+variable "tags" {
+  description = "Lista de Tags"
+  type = list(any)
+  default = []
+}
+
 
 

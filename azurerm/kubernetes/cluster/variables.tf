@@ -85,3 +85,11 @@ variable "user_node_pools" {
     os_sku               = string
   }))
 }
+
+
+
+variable "tags" {
+  description = "Lista de Tags"
+  type = list(any)
+  default = []
+}

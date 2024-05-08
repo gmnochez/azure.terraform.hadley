@@ -8,6 +8,9 @@ resource "azurerm_virtual_network" "hadley_resource" {
       id     = var.ddos_protection_plan_id 
   }
 
-
+  tags = {
+    for tag in var.tags:
+    tag.key => tag.value
+  }
 
 }

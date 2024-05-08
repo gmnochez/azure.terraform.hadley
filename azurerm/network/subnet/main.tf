@@ -4,4 +4,10 @@ resource "azurerm_subnet" "hadley_resource" {
   virtual_network_name = var.app_subnet_virtual_network_name
   address_prefixes     = var.app_subnet_address_prefixes
   service_endpoints    = var.app_subnet_service_endpoints
+
+  tags = {
+    for tag in var.tags:
+    tag.key => tag.value
+  }
+
 }

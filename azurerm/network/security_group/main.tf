@@ -14,4 +14,9 @@ resource "azurerm_network_security_group" "hadley_resource" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+  tags = {
+    for tag in var.tags:
+    tag.key => tag.value
+  }
 }

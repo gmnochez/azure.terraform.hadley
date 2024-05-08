@@ -51,6 +51,7 @@ resource "azurerm_kubernetes_cluster" "app" {
   kubernetes_version = var.kubernetes_version
 
   tags = {
-    environment = "app terraform test"
+    for tag in var.tags:
+    tag.key => tag.value
   }
 }
