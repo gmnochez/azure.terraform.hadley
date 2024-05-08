@@ -16,3 +16,10 @@ variable "app_subnet_resource_group_name" {
 variable "app_subnet_virtual_network_name" {
   description = "Virtual Network Name"
 }
+
+variable "app_subnet_service_endpoints" {
+  type = list
+  description = "List of Service Enspoints"
+}
+
+
