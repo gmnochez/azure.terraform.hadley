@@ -23,6 +23,7 @@ variable "ddos_protection_plan_enable" {
 
 variable "ddos_protection_plan_id" {
   description = "Id resource DDOS"
+  
 }
 
 

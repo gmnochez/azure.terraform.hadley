@@ -10,4 +10,5 @@ variable "location" {
 variable "tags" {
   description = "Lista de Tags"
   type = list(any)
+  default = []
 }
