@@ -16,3 +16,14 @@ variable "main_virtual_network_address_space" {
 }
 
 
+variable "ddos_protection_plan_enable" {
+  description = "DDOS protection switch"
+  type = bool
+}
+
+variable "ddos_protection_plan_id" {
+  description = "Id resource DDOS"
+}
+
+
+
