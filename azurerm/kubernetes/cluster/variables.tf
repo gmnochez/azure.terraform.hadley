@@ -51,6 +51,18 @@ variable "kubernetes_version" {
   description = "App AKS cluster Kubernetes version"
 }
 
+variable "network_plugin" {
+  description = "Network Plugin"
+}
+
+variable "network_policy" {
+  description = "Network Policy"
+}
+
+variable "load_balancer_sku" {
+  description = "Load Balancer Sku"
+}
+
 
 variable "default_node_pool" {
   description = "App AKS cluster system node pool config"
