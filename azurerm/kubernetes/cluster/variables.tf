@@ -43,10 +43,6 @@ variable "docker_bridge_cidr" {
   default     = "172.17.0.1/16"
 }
 
-variable "subnet_id" {
-  description = "App AKS subnet ID"
-}
-
 variable "sku_tier" {
   description = "App AKS cluster SKU tier"
 }
@@ -55,11 +51,28 @@ variable "kubernetes_version" {
   description = "App AKS cluster Kubernetes version"
 }
 
-variable "availability_zones" {
-  description = "Availability Zones"
-  type = list(number)
-  default = []
+
+variable "default_node_pool" {
+  description = "App AKS cluster system node pool config"
+
+  type = object({
+    name                 = string
+    type                 = string
+    enable_auto_scaling  = bool
+    node_count           = number
+    min_count            = number
+    max_count            = number
+    os_disk_type         = string
+    os_disk_size_gb      = number
+    vm_size              = string
+    orchestrator_version = string
+    os_sku               = string
+    vnet_subnet_id       = string
+    availability_zones   = list(number)
+  })
 }
+
+
 
 
 variable "tags" {

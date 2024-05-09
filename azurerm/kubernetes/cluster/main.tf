@@ -5,9 +5,9 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
   dns_prefix          = var.dns_prefix
 
   default_node_pool {
-    name                 = "system"
-    type                 = "VirtualMachineScaleSets"
-    enable_auto_scaling  = true
+    name                 = var.default_node_pool.name
+    type                 = var.default_node_pool.type
+    enable_auto_scaling  = var.default_node_pool.enable_auto_scaling
     node_count           = var.default_node_pool.node_count
     min_count            = var.default_node_pool.min_count
     max_count            = var.default_node_pool.max_count
@@ -16,8 +16,8 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
     os_disk_size_gb      = var.default_node_pool.os_disk_size_gb
     os_sku               = var.default_node_pool.os_sku
     orchestrator_version = var.default_node_pool.orchestrator_version
-    vnet_subnet_id       = var.subnet_id
-    availability_zones   = var.availability_zones
+    vnet_subnet_id       = var.default_node_pool.subnet_id
+    availability_zones   = var.default_node_pool.availability_zones
 
   }
 
@@ -33,7 +33,7 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
   linux_profile {
     admin_username = "azureuser"
     ssh_key {
-      key_data = var.ssh_key
+      key_data = file(var.ssh_key)
     }
   }
 
