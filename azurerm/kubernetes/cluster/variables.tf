@@ -38,10 +38,6 @@ variable "dns_service_ip" {
   default     = "10.0.0.10"
 }
 
-variable "docker_bridge_cidr" {
-  description = "Docker bridge CIDR"
-  default     = "172.17.0.1/16"
-}
 
 variable "sku_tier" {
   description = "App AKS cluster SKU tier"

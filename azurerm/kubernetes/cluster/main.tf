@@ -38,12 +38,11 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
   }
 
   network_profile {
-    network_plugin     = "azure"
-    network_policy     = "azure"
-    load_balancer_sku  = "standard"
+    network_plugin     = var.network_plugin
+    network_policy     = var.network_policy 
+    load_balancer_sku  = var.load_balancer_sku
     service_cidr       = var.service_cidr
-    dns_service_ip     = var.dns_service_ip
-    docker_bridge_cidr = var.docker_bridge_cidr
+    dns_service_ip     = var.dns_service_ip    
   }
 
   
