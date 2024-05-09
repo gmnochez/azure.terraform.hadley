@@ -16,8 +16,8 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
     os_disk_size_gb      = var.default_node_pool.os_disk_size_gb
     os_sku               = var.default_node_pool.os_sku
     orchestrator_version = var.default_node_pool.orchestrator_version
-    vnet_subnet_id       = var.default_node_pool.subnet_id
-    availability_zones   = var.default_node_pool.availability_zones
+    vnet_subnet_id       = var.default_node_pool.vnet_subnet_id
+    zones                = var.default_node_pool.availability_zones
 
   }
 
@@ -26,9 +26,9 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
     client_secret = var.client_secret
   }
 
-  role_based_access_control {
-    enabled = true
-  }
+  role_based_access_control_enabled = true
+  sku_tier = var.sku_tier
+  kubernetes_version = var.kubernetes_version
 
   linux_profile {
     admin_username = "azureuser"
@@ -46,9 +46,7 @@ resource "azurerm_kubernetes_cluster" "hadley_resource" {
     docker_bridge_cidr = var.docker_bridge_cidr
   }
 
-  sku_tier = var.sku_tier
-
-  kubernetes_version = var.kubernetes_version
+  
 
   tags = {
     for tag in var.tags:
