@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "app" {
+resource "azurerm_kubernetes_cluster" "hadley_resource" {
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -17,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "app" {
     os_sku               = var.default_node_pool.os_sku
     orchestrator_version = var.default_node_pool.orchestrator_version
     vnet_subnet_id       = var.subnet_id
-    availability_zones   = [1, 2, 3]
+    availability_zones   = var.availability_zones
 
   }
 

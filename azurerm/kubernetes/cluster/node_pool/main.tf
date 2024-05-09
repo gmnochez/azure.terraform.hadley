@@ -1,9 +1,9 @@
-resource "azurerm_kubernetes_cluster_node_pool" "app" {
+resource "azurerm_kubernetes_cluster_node_pool" "hadley_resource" {
   for_each = var.user_node_pools
 
   name                  = each.key
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.app.id
-  enable_auto_scaling   = true
+  kubernetes_cluster_id = var.kubernetes_cluster_id
+  enable_auto_scaling   = var.enable_auto_scaling
   node_count            = each.value.node_count
   min_count             = each.value.min_count
   max_count             = each.value.max_count
@@ -13,9 +13,11 @@ resource "azurerm_kubernetes_cluster_node_pool" "app" {
   os_sku                = each.value.os_sku
   orchestrator_version  = each.value.orchestrator_version
   vnet_subnet_id        = var.subnet_id
-  availability_zones    = [1, 2, 3]
+  availability_zones    = var.availability_zones
 
   tags = {
-    environment = "app terraform test"
+    for tag in var.tags:
+    tag.key => tag.value
   }
+
 }
