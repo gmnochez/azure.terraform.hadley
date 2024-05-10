@@ -6,16 +6,16 @@ resource "azurerm_network_security_group" "hadley_resource" {
   dynamic "security_rule" {
     for_each = var.security_rule
       content {
-        name                       = each.value.name
-        priority                   = each.value.priority
-        direction                  = each.value.direction
-        access                     = each.value.access
-        protocol                   = each.value.protocol
-        source_port_ranges         = split(",", replace(each.value.source_port_ranges, "*", "0-65535"))
-        destination_port_ranges    = split(",", replace(each.value.destination_port_ranges, "*", "0-65535"))
-        source_address_prefix      = each.value.source_address_prefix
-        destination_address_prefix = each.value.destination_address_prefix
-        description                = each.value.description
+        name                       = security_rule.value.name
+        priority                   = security_rule.value.priority
+        direction                  = security_rule.value.direction
+        access                     = security_rule.value.access
+        protocol                   = security_rule.value.protocol
+        source_port_ranges         = split(",", replace(security_rule.value.source_port_ranges, "*", "0-65535"))
+        destination_port_ranges    = split(",", replace(security_rule.value.destination_port_ranges, "*", "0-65535"))
+        source_address_prefix      = security_rule.value.source_address_prefix
+        destination_address_prefix = security_rule.value.destination_address_prefix
+        description                = security_rule.value.description
       }  
   }
  
