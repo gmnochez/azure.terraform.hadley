@@ -3,7 +3,7 @@ resource "azurerm_network_security_group" "hadley_resource" {
   location            = var.location
   resource_group_name = var.resource_group_name
 
-
+ 
   dynamic "security_rule" {
     for_each = [for rule in var.security_rule : {
       name                       = rule.name
