@@ -27,6 +27,9 @@ variable "security_rule" {
     description                = string
 
   }))
+
+  default = null
+
 }
 
 variable "tags" {
