@@ -14,7 +14,7 @@ variable "location" {
 variable "security_rule" {
   description = "Network Security Rule Definition"
 
-  type = list(map(object({
+  type = map(object({
     name                       = string
     priority                   = number
     direction                  = string
@@ -26,7 +26,7 @@ variable "security_rule" {
     destination_address_prefix = string
     description                = string
 
-  })))
+  }))
 }
 
 variable "tags" {
