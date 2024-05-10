@@ -1,3 +1,3 @@
-output "hadley_network_security_rule_id" {
-  value = azurerm_network_security_rule.hadley_resource.id
+output "hadley_network_security_rule_name" {
+  value = azurerm_network_security_rule.hadley_resource.name
 }
