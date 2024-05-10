@@ -11,7 +11,7 @@ variable "location" {
 }
 
 
-variable "security_rule" {
+variable "rules" {
   description = "Network Security Rule Definition"
 
   type = object({
