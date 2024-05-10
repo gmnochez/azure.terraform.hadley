@@ -28,7 +28,7 @@ variable "security_rule" {
 
   }))
 
-  default = []
+  default = {}
 
 }
 
