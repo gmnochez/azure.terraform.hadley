@@ -34,6 +34,7 @@ generate "provider" {
 provider "azurerm" {
   features {}
 }
+
 EOF
 }
 
@@ -63,6 +64,17 @@ terraform {
       "-lock-timeout=20m"
     ]
   }
+
+  required_providers {
+    provider "helm"  {
+    source  = "hashicorp/helm"
+    version = "~> 2.8.0"
+  }
+
+  }  
+
+
+
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
