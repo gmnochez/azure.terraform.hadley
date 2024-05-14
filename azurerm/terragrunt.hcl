@@ -68,9 +68,6 @@ terraform {
 }  
 
 
-
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # GLOBAL PARAMETERS
 # These variables apply to all configurations in this subfolder. These are automatically merged into the child
