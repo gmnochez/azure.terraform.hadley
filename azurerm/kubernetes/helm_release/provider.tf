@@ -15,7 +15,7 @@ provider "helm" {
     cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.credentials.certificate_authority.0.data)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["aks", "get-credentials", "--name", azurerm_kubernetes_cluster.credentials.name]
+      args        = ["aks", "get-credentials", "--name", azurerm_kubernetes_cluster.credentials.name, "-g", azurerm_kubernetes_cluster.credentials.resource_group_name]
       command     = "az"
   
     }
