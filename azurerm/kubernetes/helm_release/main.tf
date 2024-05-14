@@ -1,9 +1,9 @@
-resource "helm_release" "nginx" {
-  name       = "nginx"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx"
+resource "helm_release" "hadley_resource" {
+  name       = var.helm_name
+  repository = var.helm_repository
+  chart      = var.helm_chart
 
   values = [
-    file("${path.module}/nginx-values.yaml")
+    file(var.helm_file)
   ]
 }

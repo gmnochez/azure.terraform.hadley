@@ -10,3 +10,21 @@ variable "name" {
   description = "App AKS cluster name"
 }
 
+
+variable "helm_name" {
+  description = "Helm name"
+}
+
+variable "helm_repository" {
+  description = "Helm repository"
+}
+
+variable "helm_chart" {
+  description = "Helm chart"
+}
+
+variable "helm_file" {
+  description = "Helm file"
+}
+
+
