@@ -35,10 +35,6 @@ provider "azurerm" {
   features {}
 }
 
-provider "helm"  {
-  source  = "hashicorp/helm"
-  version = "~> 2.8.0"
-}
 EOF
 }
 
@@ -69,8 +65,7 @@ terraform {
     ]
   }
 
-
-  }  
+}  
 
 
 
