@@ -26,10 +26,10 @@ data "terraform_remote_state" "aks" {
 
 provider "helm" {
   kubernetes {
-    host                   = "${data.terraform_remote_state.aks.kube_config.0.host}"
-    client_certificate     = base64decode(data.terraform_remote_state.aks.kube_config.0.client_certificate)
-    client_key             = base64decode(data.terraform_remote_state.aks.kube_config.0.client_key)
-    cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.kube_config.0.cluster_ca_certificate)
+    host                   = data.terraform_remote_state.aks.defaults.endpoint
+    client_certificate     = base64decode(data.terraform_remote_state.aks.defaults.client_certificate)
+    client_key             = base64decode(data.terraform_remote_state.aks.defaults.client_key)
+    cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.defaults.certificate_authority)
   
     # host                   = data.terraform_remote_state.aks.endpoint
     # cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.certificate_authority.0.data)
