@@ -16,4 +16,9 @@ terraform {
       version = "~> 3.0.1"
     }
   }
+
+  backend "azurerm" {
+    use_microsoft_graph = false
+  }
+
 }

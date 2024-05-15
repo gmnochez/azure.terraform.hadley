@@ -11,7 +11,6 @@ data "terraform_remote_state" "aks" {
     storage_account_name = var.cluster_storage_account_name
     container_name       = "terraform-state"
     key                  = var.cluster_storage_key
-    use_msi              = true
   }
 }
 
