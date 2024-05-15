@@ -31,9 +31,4 @@ resource "helm_release" "hadley_resource" {
 }
 
 
-# data "kubernetes_service" helm_name {
-#   depends_on = [helm_release.hadley_resource]
-#   metadata {
-#     name = var.helm_name
-#   }
-# }
+
