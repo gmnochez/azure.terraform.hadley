@@ -6,7 +6,7 @@ data "azurerm_kubernetes_cluster" "credentials" {
 
 
 data "terraform_remote_state" "aks" {
-  backend = "remote"
+  backend = "azurerm"
   config = {
     subscription_id      = var.cluster_subscription_id
     resource_group_name  = var.cluster_resource_group_name
