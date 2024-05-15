@@ -41,22 +41,6 @@ provider "helm" {
   }
 }
 
-terraform {
-  required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.13.2"
-    }
-  }
-}
-
-
-
-
-
-
-
-
 
 
 resource "helm_release" "hadley_resource" {
@@ -67,4 +51,12 @@ resource "helm_release" "hadley_resource" {
   values = [
     file(var.helm_file)
   ]
+}
+
+
+data "kubernetes_service" "nginx" {
+  depends_on = [helm_release.nginx]
+  metadata {
+    name = "nginx"
+  }
 }
