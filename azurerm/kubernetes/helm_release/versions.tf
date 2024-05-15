@@ -18,7 +18,7 @@ terraform {
   }
 
   backend "azurerm" {
-    use_microsoft_graph = false
+    use_azuread_auth = false
   }
 
 }
