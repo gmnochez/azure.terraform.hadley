@@ -4,6 +4,16 @@ data "azurerm_kubernetes_cluster" "credentials" {
   resource_group_name = var.resource_group_name
 }
 
+output "test1" {
+  value = data.azurerm_kubernetes_cluster.credentials.endpoint
+}
+
+
+output "test2" {
+  value = data.azurerm_kubernetes_cluster.credentials.certificate_authority.0.data
+}
+
+
 provider "helm" {
   kubernetes {
     # host                   = data.azurerm_kubernetes_cluster.credentials.kube_config.0.host
