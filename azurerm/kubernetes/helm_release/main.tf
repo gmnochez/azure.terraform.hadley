@@ -16,11 +16,11 @@ data "terraform_remote_state" "aks" {
   }
 }
 
-# Retrieve EKS cluster configuration
-data "azurerm_kubernetes_cluster" "cluster" {
-  name = data.terraform_remote_state.aks.kube_config.0.cluster_name
-  resource_group_name  = data.terraform_remote_state.aks.kube_config.0.resource_group_name
-}
+# # Retrieve EKS cluster configuration
+# data "azurerm_kubernetes_cluster" "cluster" {
+#   name = data.terraform_remote_state.aks.kube_config.0.cluster_name
+#   resource_group_name  = data.terraform_remote_state.aks.kube_config.0.resource_group_name
+# }
 
 
 
