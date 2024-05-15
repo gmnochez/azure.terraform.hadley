@@ -16,20 +16,21 @@ data "terraform_remote_state" "aks" {
   }
 }
 
-# # Retrieve EKS cluster configuration
-# data "azurerm_kubernetes_cluster" "cluster" {
-#   name = data.terraform_remote_state.aks.kube_config.0.cluster_name
-#   resource_group_name  = data.terraform_remote_state.aks.kube_config.0.resource_group_name
-# }
+# Retrieve EKS cluster configuration
+data "azurerm_kubernetes_cluster" "cluster" {
+  name = data.terraform_remote_state.aks.outputs.cluster_name
+  resource_group_name = data.terraform_remote_state.aks.outputs.resource_group_name
+}
+
 
 
 
 provider "helm" {
   kubernetes {
-    host                   = data.terraform_remote_state.aks.defaults.endpoint
-    client_certificate     = base64decode(data.terraform_remote_state.aks.defaults.client_certificate)
-    client_key             = base64decode(data.terraform_remote_state.aks.defaults.client_key)
-    cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.defaults.certificate_authority)
+    host                   = data.azurerm_kubernetes_cluster.cluster.endpoint
+    client_certificate     = base64decode(data.azurerm_kubernetes_cluster.cluster.client_certificate)
+    client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.client_key)
+    cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.cluster_ca_certificate)
   
     # host                   = data.terraform_remote_state.aks.endpoint
     # cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.certificate_authority.0.data)
