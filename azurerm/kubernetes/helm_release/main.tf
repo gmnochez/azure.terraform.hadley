@@ -55,6 +55,6 @@ resource "helm_release" "hadley_resource" {
 data "kubernetes_service" "hadley_resource" {
   depends_on = [helm_release.hadley_resource]
   metadata {
-    name = "hadley_resource"
+    name = "nginx"
   }
 }
