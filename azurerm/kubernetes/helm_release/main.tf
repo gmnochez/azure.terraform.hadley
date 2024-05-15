@@ -27,7 +27,7 @@ data "azurerm_kubernetes_cluster" "cluster" {
 
 provider "helm" {
   kubernetes {
-    host                   = data.azurerm_kubernetes_cluster.cluster.kube_config.0.endpoint
+    host                   = data.azurerm_kubernetes_cluster.cluster.kube_config[0].host
     client_certificate     = base64decode(data.azurerm_kubernetes_cluster.cluster.client_certificate)
     client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.client_key)
     cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.cluster_ca_certificate)
