@@ -4,12 +4,14 @@
 
 data "terraform_remote_state" "aks" {
   backend = "azurerm"
+  
   config = {
     subscription_id      = var.cluster_subscription_id
     resource_group_name  = var.cluster_resource_group_name
     storage_account_name = var.cluster_storage_account_name
     container_name       = "terraform-state"
     key                  = var.cluster_storage_key
+    use_azuread_auth     = false
   }
 }
 
