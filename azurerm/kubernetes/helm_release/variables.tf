@@ -27,4 +27,22 @@ variable "helm_file" {
   description = "Helm file"
 }
 
+variable "cluster_resource_group_name" {
+  description = "Resource Group Storage tfstate"
+}
+
+variable "cluster_storage_account_name" {
+  description = "Storage Account tfstate"
+}
+variable "cluster_subscription_id" {
+  description = "Subscription tfstate"
+}
+
+variable "cluster_storage_key" {
+  description = "Key tfstate"
+}
+
+    
+
+
 
