@@ -51,6 +51,7 @@ remote_state {
     storage_account_name = local.deployment_storage_account_name
     container_name       = "terraform-state"
     key                  = "key_remote_state"
+    use_azuread_auth     = false
   }
 }
 
