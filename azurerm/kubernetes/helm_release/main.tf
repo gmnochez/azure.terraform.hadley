@@ -17,7 +17,7 @@ data "terraform_remote_state" "aks" {
 }
 
 # Retrieve EKS cluster configuration
-data "azure_aks_cluster" "cluster" {
+data "azurerm_aks_cluster" "cluster" {
   name = data.terraform_remote_state.aks.outputs.cluster_name
 }
 
@@ -34,7 +34,7 @@ provider "helm" {
     cluster_ca_certificate = base64decode(data.terraform_remote_state.aks.certificate_authority.0.data)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["aks", "get-credentials", "--name", data.azure_aks_cluster.cluster.name, "-g", data.terraform_remote_state.aks.resource_group_name]
+      args        = ["aks", "get-credentials", "--name", data.azurerm_aks_cluster.cluster.name, "-g", data.terraform_remote_state.aks.resource_group_name]
       command     = "az"
   
     }
