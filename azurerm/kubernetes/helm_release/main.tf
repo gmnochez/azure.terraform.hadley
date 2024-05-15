@@ -17,8 +17,9 @@ data "terraform_remote_state" "aks" {
 }
 
 # Retrieve EKS cluster configuration
-data "azurerm_aks_cluster" "cluster" {
+data "azurerm_kubernetes_cluster" "cluster" {
   name = data.terraform_remote_state.aks.outputs.cluster_name
+  resource_group_name  = data.terraform_remote_state.aks.outputs.resource_group_name
 }
 
 
