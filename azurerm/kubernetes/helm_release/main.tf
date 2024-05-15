@@ -5,12 +5,6 @@ data "azurerm_kubernetes_cluster" "credentials" {
 }
 
 
-cluster_storage_key          = "deployment/enviroment/daily/us/app/kubernetes/cluster.tfstate"
-    cluster_resource_group_name  = "rg-shared-eus2"
-    cluster_storage_account_name = "assdteus2016st001"
-    cluster_subscription_id      = "61407a28-a2f5-4d0d-86da-6af06fb1ef92"
-
-
 data "terraform_remote_state" "aks" {
   backend = "cluster"
   config = {
