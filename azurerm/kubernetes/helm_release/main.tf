@@ -23,9 +23,6 @@ data "azure_aks_cluster" "cluster" {
 
 
 
-
-
-
 provider "helm" {
   kubernetes {
     # host                   = data.azurerm_kubernetes_cluster.credentials.kube_config.0.host
@@ -48,7 +45,7 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.8.0"
+      version = "2.13.2"
     }
   }
 }
