@@ -17,8 +17,5 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    use_azuread_auth = false
-  }
-
+  required_version = "~> 1.3"
 }
