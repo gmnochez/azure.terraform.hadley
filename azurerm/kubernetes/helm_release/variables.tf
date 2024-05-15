@@ -3,7 +3,7 @@
 
 
 variable "resource_group_name" {
-  description = "Resource group name"
+  description = "Resource group name cluster"
 }
 
 variable "name" {
