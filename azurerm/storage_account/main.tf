@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "ktc-storage" {
+resource "azurerm_storage_account" "hadley_resource" {
   name                            = var.name
   resource_group_name             = var.resource_group_name
   location                        = var.location
