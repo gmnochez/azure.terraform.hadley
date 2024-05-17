@@ -8,6 +8,7 @@ data "azurerm_storage_account" "storage" {
 
 
 data "azurerm_platform_image" "image" {
+  count        = var.platform_image.location == "" ? 0 : 1
   location  = var.platform_image.location
   publisher = var.platform_image.publisher
   offer     = var.platform_image.offer
@@ -16,6 +17,7 @@ data "azurerm_platform_image" "image" {
 
 
 data "azurerm_shared_image_version" "image_version" {
+  count        = var.shared_image_version.name == "" ? 0 : 1
   name                = var.shared_image_version.name
   image_name          = var.shared_image_version.image_name
   gallery_name        = var.shared_image_version.gallery_name
