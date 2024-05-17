@@ -27,7 +27,7 @@ data "azurerm_shared_image_version" "image_version" {
 
 locals{
 
-  url_os_disk = "${azurerm_storage_account.storage.primary_blob_endpoint}${var.storage_account_blob}/${var.vm_os_disk_source_name}"
+  url_os_disk = "${data.azurerm_storage_account.storage.primary_blob_endpoint}${var.storage_account_blob}/${var.vm_os_disk_source_name}"
   
 }
 
