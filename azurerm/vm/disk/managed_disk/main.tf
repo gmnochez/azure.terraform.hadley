@@ -51,8 +51,8 @@ resource "azurerm_managed_disk" "hadley_resource" {
   source_uri                  = var.create_option == "Import" ? local.url_os_disk : null 
 
   #FromImage
-  image_reference_id          = var.create_option == "FromImage" ? data.azurerm_platform_image.image.id : null
-  gallery_image_reference_id  = var.create_option == "FromImage" ? data.azurerm_platform_image.image.id : null
+  image_reference_id          = var.create_option == "FromImage" ? data.azurerm_platform_image.image[0].id : null
+  gallery_image_reference_id  = var.create_option == "FromImage" ? data.azurerm_shared_image_version.image[0].id : null
   
   hyper_v_generation          = var.os_type == "" ? null : var.hyper_v_generation 
   os_type                     = var.os_type == "" ? null : var.os_type
