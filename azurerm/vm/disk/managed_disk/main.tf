@@ -8,6 +8,7 @@ data "azurerm_storage_account" "storage" {
 
 
 data "azurerm_platform_image" "image" {
+  count        = var.platform_image.location == "" ? 0 : 1
   location  = var.platform_image.location
   publisher = var.platform_image.publisher
   offer     = var.platform_image.offer
@@ -17,6 +18,7 @@ data "azurerm_platform_image" "image" {
 
 
 data "azurerm_shared_image_version" "image_version" {
+  count        = var.shared_image_version.name == "" ? 0 : 1
   name                = var.shared_image_version.name
   image_name          = var.shared_image_version.image_name
   gallery_name        = var.shared_image_version.gallery_name
@@ -50,8 +52,8 @@ resource "azurerm_managed_disk" "hadley_resource" {
   source_uri                  = var.create_option == "Import" ? local.url_os_disk : null 
 
   #FromImage
-  image_reference_id          = var.create_option == "FromImage" && length(data.azurerm_platform_image.image) == 1 ? data.azurerm_platform_image.image.id : null
-  gallery_image_reference_id  = var.create_option == "FromImage" && length(data.azurerm_shared_image_version.image_version) == 1 ? data.azurerm_shared_image_version.image_version.id : null
+  image_reference_id          = var.create_option == "FromImage" && length(data.azurerm_platform_image.image) == 1 ? data.azurerm_platform_image.image[0].id : null
+  gallery_image_reference_id  = var.create_option == "FromImage" && length(data.azurerm_shared_image_version.image_version) == 1 ? data.azurerm_shared_image_version.image_version[0].id : null
   
   hyper_v_generation          = var.os_type == "" ? null : var.hyper_v_generation 
   os_type                     = var.os_type == "" ? null : var.os_type
