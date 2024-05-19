@@ -69,6 +69,7 @@ variable "platform_image" {
     publisher   = string
     offer       = string    
     sku         = string
+    version     = string
   })
 }
 

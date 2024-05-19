@@ -13,6 +13,7 @@ data "azurerm_platform_image" "image" {
   publisher = var.platform_image.publisher
   offer     = var.platform_image.offer
   sku       = var.platform_image.sku
+  version   = var.platform_image.version
 }
 
 
