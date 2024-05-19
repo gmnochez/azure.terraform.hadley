@@ -53,7 +53,7 @@ resource "azurerm_managed_disk" "hadley_resource" {
 
   #FromImage
   image_reference_id          = var.create_option == "FromImage" ? data.azurerm_platform_image.image[0].id : null
-  gallery_image_reference_id  = var.create_option == "FromImage" && data.azurerm_shared_image_version.image_version.count == 1 ? data.azurerm_shared_image_version.image_version[0].id : null
+  gallery_image_reference_id  = var.create_option == "FromImage" && data.azurerm_shared_image_version.image_version.length == 1 ? data.azurerm_shared_image_version.image_version[0].id : null
   
   hyper_v_generation          = var.os_type == "" ? null : var.hyper_v_generation 
   os_type                     = var.os_type == "" ? null : var.os_type
