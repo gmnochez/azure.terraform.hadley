@@ -1,3 +1,16 @@
+data "azurerm_network_security_group" "nsg" {
+  name                = var.name_nsg
+  location            = var.location_nsg
+  resource_group_name = var.resource_group_nsg_name
+
+}
+
+
+resource "azurerm_network_interface_security_group_association" "ktc-association" {
+  network_interface_id      = azurerm_network_interface.hadley_resource.id
+  network_security_group_id = data.azurerm_network_security_group.nsg.id
+}
+
 resource "azurerm_network_interface" "hadley_resource" {
   
   name                = var.name

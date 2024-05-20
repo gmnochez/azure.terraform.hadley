@@ -26,6 +26,18 @@ variable "ip_configuration_private_ip_address" {
   description = "Ip Configuration Private IP"
 }
 
+variable "name_nsg" {
+  description = "Name NSG"
+}
+
+variable "location_nsg" {
+  description = "Location NSG"
+}
+
+variable "resource_group_nsg_name" {
+  description = "Resource Group NSG"
+}
+
 
 variable "tags" {
   description = "Lista de Tags"
