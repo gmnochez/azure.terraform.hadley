@@ -1,9 +1,9 @@
 output "hadley_resource_role_assignment_name" {
-  value = azurerm_role_assignment.hadley_resource.name
+  value = {for k, v in azurerm_role_assignment.hadley_resource: k => v.name}
 }
 
 output "hadley_resource_role_assignment_id" {
-  value = azurerm_role_assignment.hadley_resource.id
+  value = {for k, v in azurerm_role_assignment.hadley_resource: k => v.id}
 }
 
 
