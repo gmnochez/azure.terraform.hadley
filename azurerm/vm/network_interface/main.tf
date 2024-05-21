@@ -11,7 +11,7 @@ resource "azurerm_network_interface_security_group_association" "ktc-association
 }
 
 
-data "azurerm_network_interface" "netifg" {
+data "azurerm_network_interface" "interface" {
   name                = var.name
   resource_group_name = var.resource_group_name
 
@@ -19,8 +19,7 @@ data "azurerm_network_interface" "netifg" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  # id                  = length(data.azurerm_network_interface.netifg) == 1 ? data.azurerm_network_interface.netifg.id : null
-  id                  = null
+  id                  = length(data.azurerm_network_interface.interface) == 1 ? data.azurerm_network_interface.interface.id : null
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
