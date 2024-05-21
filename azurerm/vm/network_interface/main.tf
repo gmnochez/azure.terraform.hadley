@@ -19,7 +19,7 @@ data "azurerm_network_interface" "netifg" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = data.azurerm_network_interface.netifg.id == null ? null : data.azurerm_network_interface.netifg.id
+  id                  = length(data.azurerm_network_interface.netifg) == 1 ? data.azurerm_network_interface.netifg.id : null
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
