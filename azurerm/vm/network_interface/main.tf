@@ -11,16 +11,11 @@ resource "azurerm_network_interface_security_group_association" "association" {
 }
 
 
-data "azurerm_network_interface" "hadley_resource" {
-  name                = var.name
-  resource_group_name = var.resource_group_name
 
-}
 
 
 resource "azurerm_network_interface" "hadley_resource" {
 
-  id                  = output.hadley_resource_network_interface_id
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
