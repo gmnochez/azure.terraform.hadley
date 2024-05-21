@@ -20,7 +20,7 @@ data "azurerm_network_interface" "interface" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = data.azurerm_network_interface.interface[0] != null ? data.azurerm_network_interface.interface[0].id : null
+  id                  = data.azurerm_network_interface.interface.id
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
