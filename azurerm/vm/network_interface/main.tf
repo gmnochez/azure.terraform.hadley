@@ -17,10 +17,14 @@ data "azurerm_network_interface" "interface" {
 
 }
 
+output "network_interface_id" {
+  value = data.azurerm_network_interface.interface.id
+}
+
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = data.azurerm_network_interface.interface.id
+  id                  = output.network_interface_id
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
