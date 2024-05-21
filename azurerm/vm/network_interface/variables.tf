@@ -34,7 +34,7 @@ variable "location_nsg" {
   description = "Location NSG"
 }
 
-variable "resource_group_nsg_name" {
+variable "resource_group_name_nsg" {
   description = "Resource Group NSG"
 }
 
