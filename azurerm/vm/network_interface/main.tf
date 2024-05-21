@@ -5,14 +5,13 @@ data "azurerm_network_security_group" "nsg" {
 }
 
 
-resource "azurerm_network_interface_security_group_association" "ktc-association" {
+resource "azurerm_network_interface_security_group_association" "association" {
   network_interface_id      = azurerm_network_interface.hadley_resource.id
   network_security_group_id = data.azurerm_network_security_group.nsg.id
 }
 
 
-data "azurerm_network_interface" "interface" {
-  count               = data.azurerm_network_interface.interface == null ? 0 : 1
+data "azurerm_network_interface" "hadley_resource" {
   name                = var.name
   resource_group_name = var.resource_group_name
 
@@ -21,7 +20,7 @@ data "azurerm_network_interface" "interface" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = length(data.azurerm_network_interface.interface) == 1 ? data.azurerm_network_interface.interface[0].id : null
+  id                  = data.azurerm_network_interface.hadley_resource.id
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
