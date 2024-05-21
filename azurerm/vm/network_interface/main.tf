@@ -21,7 +21,7 @@ data "azurerm_network_interface" "interface" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = data.azurerm_network_interface.interface.count == 1 ? data.azurerm_network_interface.interface[0].id : null
+  id                  = length(data.azurerm_network_interface.interface) == 1 ? data.azurerm_network_interface.interface[0].id : null
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
