@@ -14,7 +14,6 @@ resource "azurerm_network_interface_security_group_association" "ktc-association
 
 data "azurerm_network_interface" "netifg" {
   name                = var.name
-  location            = var.location
   resource_group_name = var.resource_group_name
 
 }
