@@ -22,7 +22,7 @@ data "azurerm_network_interface" "interface" {
 
 resource "azurerm_network_interface" "hadley_resource" {
   
-  id                  = output.network_interface_id
+  id                  = "${output.network_interface_id}"
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
