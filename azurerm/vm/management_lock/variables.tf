@@ -3,13 +3,13 @@ variable "scope" {
 }
 
 variable "name" {
-  description = "Scope"
+  description = "Name"
 }
 
 variable "lock_level" {
-  description = "Scope"
+  description = "Lock Level"
 }
 
 variable "notes" {
-  description = "Scope"
+  description = "Notes"
 }
