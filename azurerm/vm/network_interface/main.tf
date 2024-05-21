@@ -1,6 +1,5 @@
 data "azurerm_network_security_group" "nsg" {
   name                = var.name_nsg
-  location            = var.location_nsg
   resource_group_name = var.resource_group_name_nsg
 
 }
