@@ -17,9 +17,7 @@ data "azurerm_network_interface" "interface" {
 
 }
 
-output "network_interface_id" {
-  value = data.azurerm_network_interface.interface.id
-}
+
 
 
 resource "azurerm_network_interface" "hadley_resource" {
