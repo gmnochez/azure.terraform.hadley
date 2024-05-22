@@ -38,14 +38,30 @@ resource "azurerm_virtual_machine" "hadley_resource" {
   
 
 
-  os_profile_windows_config {
-    enable_automatic_upgrades = false
-    provision_vm_agent = true
+ 
+  dynamic "os_profile_windows_config" {
+    for_each = var.storage_os_disk.os_type == "Windows" ? [1] : []
+    content {
+      enable_automatic_upgrades = false
+      provision_vm_agent = true
+    }
   }
+
+  dynamic "os_profile_linux_config" {
+    for_each = var.storage_os_disk.os_type == "Linux" ? [1] : []
+    content {
+      disable_password_authentication = false
+    }
+  }
+
+  # os_profile_windows_config {
+  #   enable_automatic_upgrades = false
+  #   provision_vm_agent = true
+  # }
   
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
+  # os_profile_linux_config {
+  #   disable_password_authentication = false
+  # }
 
 
   storage_os_disk{
