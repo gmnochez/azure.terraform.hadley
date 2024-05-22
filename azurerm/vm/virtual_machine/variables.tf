@@ -10,8 +10,8 @@ variable "resource_group_name" {
   description = "Resource Group Name"
 }
 
-variable "network_interface_ids" {
-  description = "Network Interface Ids"
+variable "network_interface_name" {
+  description = "Network Interface Name"
 }
 
 variable "vm_size" {
@@ -28,6 +28,14 @@ variable "delete_data_disks_on_termination" {
 
 variable "delete_os_disk_on_termination" {
   description = "Switch delete os disk"
+}
+
+variable "storage_account_name" {
+  description = "Storage Account Name"
+}
+
+variable "storage_account_resource_group" {
+  description = "Storage Account Resource Group"
 }
 
 variable "os_profile_windows_config" {
@@ -52,7 +60,6 @@ variable "storage_os_disk" {
     caching           = string
     create_option     = string
     managed_disk_type = string
-    managed_disk_id   = string
     disk_size_gb      = number
     os_type           = string
   })
@@ -66,7 +73,6 @@ variable "storage_data_disk" {
     caching           = string
     create_option     = string
     managed_disk_type = string
-    managed_disk_id   = string
     disk_size_gb      = number
   })
 }
@@ -74,8 +80,9 @@ variable "storage_data_disk" {
 variable "boot_diagnostics" {
   description = "Boot Diagnostics"
   type = object({
-    enabled           = string
-    storage_uri       = string
+    enabled                         = string
+    storage_account_name            = string
+    storage_account_resource_group  = string
   })
 }
 
