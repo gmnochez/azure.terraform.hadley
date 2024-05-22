@@ -19,7 +19,8 @@ variable "vm_size" {
 }
 
 variable "zones" {
-  description = "Zones"
+  description = "Lista de Zones"
+  type = list(string)
 }
 
 variable "delete_data_disks_on_termination" {
