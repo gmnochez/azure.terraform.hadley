@@ -85,7 +85,7 @@ resource "azurerm_virtual_machine" "hadley_resource" {
 
   boot_diagnostics {
     enabled       = "true"
-    storage_uri   = data.azurerm_storage_account.storage.id
+    storage_uri   = data.azurerm_storage_account.storage.primary_blob_endpoint
   }
   
   tags = {
