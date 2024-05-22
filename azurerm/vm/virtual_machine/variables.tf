@@ -19,7 +19,7 @@ variable "vm_size" {
 }
 
 variable "zones" {
-  description = "Lista de Zones"
+  description = "List of Zones"
   type = list(string)
 }
 
