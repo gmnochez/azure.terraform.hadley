@@ -1,15 +1,14 @@
-variable "scope" {
-  description = "Scope"
+variable "management_lock" {
+  description = "Management Lock"
+
+  type = map(object({
+    scope            = string
+    name             = string
+    lock_level       = string
+    notes            = string
+  }))
+
+  default = {}
+
 }
 
-variable "name" {
-  description = "Name"
-}
-
-variable "lock_level" {
-  description = "Lock Level"
-}
-
-variable "notes" {
-  description = "Notes"
-}
