@@ -6,7 +6,7 @@ variable "role_assignment" {
 
   type = map(object({
     scope                       = string
-    role_assignment_id          = list(string)
+    role_assignment_id          = string
     role_assignment_name        = string
   }))
 
