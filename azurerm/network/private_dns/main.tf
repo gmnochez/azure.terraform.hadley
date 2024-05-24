@@ -1,4 +1,8 @@
-
+provider "azurerm" {
+  alias           = "dns"
+  subscription_id = var.provider_subscription_id
+  features {}
+}
 
 resource "azurerm_private_dns_a_record" "hadley_resource" {
   for_each = var.private_dns
