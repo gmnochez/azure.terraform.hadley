@@ -1,5 +1,5 @@
 provider "azurerm" {
-  alias           = var.provider_alias
+  alias           = "dns"
   subscription_id = var.provider_subscription_id
   features {}
 }

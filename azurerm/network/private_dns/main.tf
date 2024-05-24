@@ -1,18 +1,14 @@
-provider "azurerm" {
-  alias           = var.provider_alias
-  subscription_id = var.provider_subscription_id
-  features {}
-}
+
 
 resource "azurerm_private_dns_a_record" "hadley_resource" {
-  provider            = "azurerm.${var.provider_alias}"
-  name                = var.name
-  zone_name           = var.zone_name
-  resource_group_name = var.resource_group_name
-  ttl                 = var.ttl
-  records             = var.records
+  for_each = var.private_dns
+  provider            = azurerm.dns
+  name                = each.value.name
+  zone_name           = each.value.zone_name
+  resource_group_name = each.value.resource_group_name
+  ttl                 = each.value.ttl
+  records             = each.value.records
 
- 
   tags = {
     for tag in var.tags:
     tag.key => tag.value
