@@ -1,6 +1,7 @@
 provider "azurerm" {
   alias           = "dns"
   subscription_id = var.provider_subscription_id
+  skip_provider_registration = true
   features {}
 }
 
