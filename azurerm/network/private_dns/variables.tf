@@ -1,10 +1,5 @@
 
 
-
-variable "provider_alias" {
-  description = "Provider Alias"
-}
-
 variable "provider_subscription_id" {
   description = "Provider Subscription ID"
 }
