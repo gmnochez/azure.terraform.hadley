@@ -19,6 +19,7 @@ resource "azurerm_network_interface" "hadley_resource" {
   name                = var.name
   location            = var.location
   resource_group_name = var.resource_group_name
+  dns_servers         = var.dns_servers
 
   ip_configuration {
     name                          = var.ip_configuration_name

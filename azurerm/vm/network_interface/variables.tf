@@ -39,8 +39,16 @@ variable "resource_group_name_nsg" {
 }
 
 
+
+variable "dns_servers" {
+  description = "Dns Server List"
+  type = list(string)
+  default = []
+}
+
+
 variable "tags" {
-  description = "Lista de Tags"
+  description = "Tag List"
   type = list(any)
   default = []
 }
