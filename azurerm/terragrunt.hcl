@@ -37,7 +37,7 @@ provider "azurerm" {
 
 EOF
 }
-
+ 
 # Configure Terragrunt to automatically store tfstate files in an Blob Storage container
 remote_state {
   backend = "azurerm"
