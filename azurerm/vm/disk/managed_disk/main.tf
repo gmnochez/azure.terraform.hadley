@@ -44,9 +44,9 @@ resource "azurerm_managed_disk" "hadley_resource" {
   storage_account_type        = var.storage_account_type
   storage_account_id          = data.azurerm_storage_account.storage.id
   create_option               = var.create_option
-  on_demand_bursting_enabled  = var.on_demand_bursting_enabled 
-  trusted_launch_enabled      = var.trusted_launch_enabled
-  upload_size_bytes           = var.upload_size_bytes
+  # on_demand_bursting_enabled  = var.on_demand_bursting_enabled 
+  # trusted_launch_enabled      = var.trusted_launch_enabled
+  # upload_size_bytes           = var.upload_size_bytes
 
 
   #Copy 
