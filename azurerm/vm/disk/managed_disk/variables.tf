@@ -22,8 +22,14 @@ variable "on_demand_bursting_enabled" {
   description = "On Demand Bursting Enabled"
 }
 
- 
+variable "trusted_launch_enabled" {
+  description = "Trusted Launch Enabled"
+}
 
+variable "upload_size_bytes" {
+  description = "Upload Size Bytes"
+}
+ 
 variable "hyper_v_generation" {
   description = "Manage Disk Hyperv Generation"
 }
