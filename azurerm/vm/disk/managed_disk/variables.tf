@@ -18,6 +18,12 @@ variable "create_option" {
   description = "Manage Disk Create Option"
 }
 
+variable "on_demand_bursting_enabled" {
+  description = "On Demand Bursting Enabled"
+}
+
+ 
+
 variable "hyper_v_generation" {
   description = "Manage Disk Hyperv Generation"
 }

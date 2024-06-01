@@ -44,7 +44,8 @@ resource "azurerm_managed_disk" "hadley_resource" {
   storage_account_type        = var.storage_account_type
   storage_account_id          = data.azurerm_storage_account.storage.id
   create_option               = var.create_option
- 
+  on_demand_bursting_enabled  = var.on_demand_bursting_enabled 
+
   #Copy 
   source_resource_id          = var.create_option == "Copy" ? var.source_resource_id : null
  
