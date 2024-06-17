@@ -4,9 +4,6 @@ variable "shutdown_schedules" {
 
   type = map(object({
     virtual_machine_id                        = string
-    enabled                                   = string
-    daily_recurrence_time                     = string
-    timezone                                  = string
   }))
 
   default = {}
@@ -14,8 +11,21 @@ variable "shutdown_schedules" {
 }
 
 
+
 variable "location" {
   description = "Location"
+}
+
+variable "enabled" {
+  description = "Enabled"
+}
+
+variable "daily_recurrence_time" {
+  description = "Enabled"
+}
+
+variable "timezone" {
+  description = "Enabled"
 }
 
 
