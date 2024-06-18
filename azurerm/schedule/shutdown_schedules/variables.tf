@@ -18,19 +18,21 @@ variable "location" {
 
 variable "enabled" {
   description = "Enabled"
+  type = bool
 }
 
 variable "daily_recurrence_time" {
-  description = "Enabled"
+  description = "Daily Recurrence Time"
 }
 
 variable "timezone" {
-  description = "Enabled"
+  description = "timezone"
 }
 
 
 variable "notification_settings_enabled" {
   description = "Notification Settings Enabled"
+  type = bool
 }
 
 variable "notification_settings_time_in_minutes" {
