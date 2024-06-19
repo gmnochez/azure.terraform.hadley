@@ -1,6 +1,6 @@
 
 variable "shutdown_schedules" {
-  description = "Role Assignment"
+  description = "Shutdown Schedule"
 
   type = map(object({
     virtual_machine_id                        = string
