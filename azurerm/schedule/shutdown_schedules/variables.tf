@@ -39,11 +39,11 @@ variable "notification_settings_time_in_minutes" {
   description = "Notification Settings Time In Minutes"
 }
 
-variable "notification_settings_enabled_webhook_url" {
+variable "notification_settings_webhook_url" {
   description = "Notification Settings Enabled Webhook Url"
 }
 
-variable "notification_settings_enabled_email" {
+variable "notification_settings_email" {
   description = "Notification Settings Enabled Email"
 }
 

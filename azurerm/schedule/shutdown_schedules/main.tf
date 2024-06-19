@@ -11,8 +11,8 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "hadley_resource" {
   notification_settings  {
     enabled               = var.notification_settings_enabled
     time_in_minutes       = var.notification_settings_time_in_minutes
-    webhook_url           = var.notification_settings_enabled_webhook_url
-    email                 = var.notification_settings_enabled_email
+    webhook_url           = var.notification_settings_webhook_url
+    email                 = var.notification_settings_email
   }
 
 
