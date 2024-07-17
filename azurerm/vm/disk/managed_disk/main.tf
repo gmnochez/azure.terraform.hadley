@@ -42,7 +42,7 @@ resource "azurerm_managed_disk" "hadley_resource" {
   location                    = var.location
   resource_group_name         = var.resource_group_name
   storage_account_type        = var.storage_account_type
-  # storage_account_id          = data.azurerm_storage_account.storage.id
+  storage_account_id          = var.create_option == "Import" ? data.azurerm_storage_account.storage.id : null
   create_option               = var.create_option
 
 
