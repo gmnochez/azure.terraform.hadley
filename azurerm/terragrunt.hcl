@@ -56,7 +56,7 @@ remote_state {
 
 terraform {
 
-  required_version = "= 1.9.8"
+  required_version = ">= 1.9.8"
   # Force Terraform to keep trying to acquire a lock for
   # up to 20 minutes if someone else already has the lock
   extra_arguments "retry_lock" {
