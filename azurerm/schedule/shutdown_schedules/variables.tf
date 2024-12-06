@@ -8,7 +8,6 @@ variable "shutdown_schedules" {
 
   default = {}
  
-  sensitive = true
 }
 
 
