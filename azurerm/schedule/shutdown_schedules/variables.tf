@@ -7,7 +7,8 @@ variable "shutdown_schedules" {
   }))
 
   default = {}
-
+  ephemeral = true
+  
 }
 
 
