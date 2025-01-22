@@ -68,14 +68,14 @@ variable "storage_os_disk" {
 
 variable "storage_data_disk" {
   description = "Storage Data Disk"
-  type = object({
+  type = list(object({
     name              = string
     lun               = string
     caching           = string
     create_option     = string
     managed_disk_type = string
     disk_size_gb      = number
-  })
+  }))
 }
 
 variable "boot_diagnostics" {

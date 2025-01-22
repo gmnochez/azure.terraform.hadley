@@ -13,7 +13,8 @@ data "azurerm_managed_disk" "os_disk" {
 
 
 data "azurerm_managed_disk" "data_disk" {
-  name                = var.storage_data_disk.name 
+  for_each           = { for disk in var.storage_data_disk : disk.name => disk }
+  name                = each.value.name 
   resource_group_name = var.resource_group_name
 }
 
@@ -70,15 +71,15 @@ resource "azurerm_virtual_machine" "hadley_resource" {
 
 
   dynamic "storage_data_disk" {
-    for_each = var.storage_data_disk.name != "" ? [1] : []
+    for_each = var.storage_data_disk.name != "" ? [] : []
     content {
-      name              = var.storage_data_disk.name
-      lun               = var.storage_data_disk.lun
-      caching           = var.storage_data_disk.caching
-      create_option     = var.storage_data_disk.create_option
-      managed_disk_type = var.storage_data_disk.managed_disk_type
-      managed_disk_id   = data.azurerm_managed_disk.data_disk.id
-      disk_size_gb      = var.storage_data_disk.disk_size_gb
+      name              = storage_data_disk.value.name
+      lun               = storage_data_disk.lun
+      caching           = storage_data_disk.caching
+      create_option     = storage_data_disk.create_option
+      managed_disk_type = storage_data_disk.managed_disk_type
+      managed_disk_id   = data.azurerm_managed_disk.data_disk[storage_data_disk.value.name].id
+      disk_size_gb      = storage_data_disk.disk_size_gb
     }
   }
 
