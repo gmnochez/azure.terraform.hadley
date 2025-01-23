@@ -71,7 +71,6 @@ resource "azurerm_virtual_machine" "hadley_resource" {
 
 
   dynamic "storage_data_disk" {
-    #for_each = var.storage_data_disk.name != "" ? [] : []
     for_each = var.storage_data_disk
     content {
       name              = storage_data_disk.value.name
