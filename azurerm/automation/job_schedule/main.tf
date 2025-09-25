@@ -8,6 +8,9 @@ resource "azurerm_automation_job_schedule" "hadley_resource" {
   azure_subscription_id   = each.value.azure_subscription_id
   action                  = each.value.action
   
+
+
+  
   automation_account_name = var.automation_account_name
   resource_group_name     = var.resource_group_name
   runbook_name            = var.runbook_name
