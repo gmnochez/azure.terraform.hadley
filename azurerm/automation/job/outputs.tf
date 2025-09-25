@@ -1,5 +1,0 @@
-
-output "hadley_resource_automation_job_id" {
-  
-  value = {for k, v in azurerm_automation_job.hadley_resource: k => v.id}
-}

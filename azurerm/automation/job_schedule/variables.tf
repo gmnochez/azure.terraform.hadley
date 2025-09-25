@@ -1,6 +1,6 @@
 
-variable "automation_jobs" {
-  description = "automation_jobs"
+variable "automation_job_schedules" {
+  description = "automation job schedules"
 
   type = map(object({
     job_name                = string
@@ -30,5 +30,8 @@ variable "runbook_name" {
   description = "runbook_name"
 }
 
+variable "schedule_name" {
+  description = "schedule_name"
+}
 
 
