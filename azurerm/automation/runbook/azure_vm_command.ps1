@@ -42,7 +42,7 @@
 .INPUTS
     None
 .OUTPUTS
-    String to determine result of the script
+    String to determine result of the script executed
 #>
 
 
