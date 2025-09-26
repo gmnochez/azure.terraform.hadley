@@ -45,13 +45,13 @@ resource "azurerm_automation_schedule" "hadley_resource" {
 
 
 resource "azurerm_automation_job_schedule" "hadley_resource" {
-  # for_each = {
-  #   for idx, job in local.flattened_jobs :
-  #   "${job.vm_name}" => job
-  #   if !job.disabled                      # ✅ skip if disabled = true
-  # }
+  for_each = {
+    for idx, job in local.flattened_jobs :
+    "${job.vm_name}" => job
+    if !job.disabled                      # ✅ skip if disabled = true
+  }
 
-  for_each = azurerm_automation_schedule.hadley_resource  # ✅ reference schedule directly
+
   automation_account_name = each.value.automation_account_name
   resource_group_name     = each.value.resource_group_name
   runbook_name            = each.value.runbook_name
@@ -64,6 +64,8 @@ resource "azurerm_automation_job_schedule" "hadley_resource" {
     azure_subscription_id = each.value.azure_subscription_id
     action_script         = each.value.action_script
   }
+
+  depends_on = [azurerm_automation_schedule.hadley_resource]
 }
 
 
