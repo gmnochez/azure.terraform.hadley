@@ -152,8 +152,6 @@ catch {
     throw "Failed to get the OS type from VM: $($_.Exception.Message)"
 }
 
-
-
 try {
     # Get VM with status
     $vmStatus = Get-AzVM -ResourceGroupName $rgn_vm -Name $vm_name -Status
