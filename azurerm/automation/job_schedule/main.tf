@@ -23,29 +23,6 @@ locals {
   ])
 }
 
-
-resource "azurerm_automation_job_schedule" "hadley_resource" {
-  for_each = {
-    for idx, job in local.flattened_jobs :
-    "${job.vm_name}" => job
-    if !job.disabled                      # ✅ skip if disabled = true
-  }
-
-  automation_account_name = each.value.automation_account_name
-  resource_group_name     = each.value.resource_group_name
-  runbook_name            = each.value.runbook_name
-  schedule_name           = "${each.value.schedule_name}_${each.value.vm_name}"
-
-  parameters = {
-    vm_name               = each.value.vm_name
-    vm_command            = each.value.vm_command
-    rgn_vm                = each.value.rgn_vm
-    azure_subscription_id = each.value.azure_subscription_id
-    action_script         = each.value.action_script
-  }
-}
-
-
 resource "azurerm_automation_schedule" "hadley_resource" {
   for_each = {
     for idx, job in local.flattened_jobs :
@@ -65,3 +42,29 @@ resource "azurerm_automation_schedule" "hadley_resource" {
   description               = each.value.description
 
 }
+
+
+resource "azurerm_automation_job_schedule" "hadley_resource" {
+  # for_each = {
+  #   for idx, job in local.flattened_jobs :
+  #   "${job.vm_name}" => job
+  #   if !job.disabled                      # ✅ skip if disabled = true
+  # }
+
+  for_each = azurerm_automation_schedule.hadley_resource  # ✅ reference schedule directly
+  automation_account_name = each.value.automation_account_name
+  resource_group_name     = each.value.resource_group_name
+  runbook_name            = each.value.runbook_name
+  schedule_name           = "${each.value.schedule_name}_${each.value.vm_name}"
+
+  parameters = {
+    vm_name               = each.value.vm_name
+    vm_command            = each.value.vm_command
+    rgn_vm                = each.value.rgn_vm
+    azure_subscription_id = each.value.azure_subscription_id
+    action_script         = each.value.action_script
+  }
+}
+
+
+
