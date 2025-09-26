@@ -10,8 +10,7 @@ locals {
         automation_account_name   = schedule.common_params.automation_account_name
         resource_group_name       = schedule.common_params.resource_group_name
         runbook_name              = schedule.common_params.runbook_name
-        schedule_name             = schedule.common_params.schedule_name
-        name                      = schedule.schedule_params.name
+        schedule_name             = schedule.schedule_params.schedule_name
         frequency                 = schedule.schedule_params.frequency
         interval                  = schedule.schedule_params.interval
         timezone                  = schedule.schedule_params.timezone
