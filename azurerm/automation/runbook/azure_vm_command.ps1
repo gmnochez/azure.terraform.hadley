@@ -163,10 +163,7 @@ try {
     Write-Error "Error processing VM '$vm_name': $($_.Exception.Message)"
 }
 
-
-
-
-
+Get-AzVMRunCommand -ResourceGroupName $rgn_vm -VMName $VMName
 
 switch ($action_script) {
     "Start" {
