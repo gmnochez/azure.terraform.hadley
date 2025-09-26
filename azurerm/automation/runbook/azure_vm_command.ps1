@@ -131,13 +131,37 @@ catch {
 
 
 Write-Output "Applying $action_script in the vm $vm_name ...."
+
+try {
+    # Determine OS
+    $osType = $VM.StorageProfile.OSDisk.OSType.ToString()
+    Write-Output "Detected OS type: $osType"
+
+    # Decide CommandId
+    if ($osType -eq "Windows") {
+        $commandType = "RunPowerShellScript"
+    } elseif ($osType -eq "Linux") {
+        $commandType = "RunShellScript"
+    } else {
+        throw "Unknown OS type: $osType"
+    }
+
+
+}
+catch {
+    throw "Failed to get the OS type from VM: $($_.Exception.Message)"
+}
+
+
+
+
 switch ($action_script) {
     "Start" {
         # Start the VM
         try {
             Write-Output "Starting VM $($VM.Name)..."
             $null = $VM | Start-AzVM -ErrorAction Stop -NoWait
-            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
+            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
             Write-Output $result.value.Message    
         }
         catch {
