@@ -182,7 +182,7 @@ switch ($action_script) {
         }
         catch {
             $ErrorMessage = $_.Exception.Message
-            Write-Error "Error starting the VM $($VM.Name): " + $ErrorMessage
+            Write-Error "Error starting the VM $($VM.Name): $ErrorMessage"
             # increase error count
             $errorCount++
             Break
@@ -205,7 +205,7 @@ switch ($action_script) {
         }
         catch {
             $ErrorMessage = $_.Exception.Message
-            Write-Error "Error stopping the VM $($VM.Name): " + $ErrorMessage
+            Write-Error "Error stopping the VM $($VM.Name): $ErrorMessage"
             # increase error count
             $errorCount++
             Break
