@@ -6,8 +6,8 @@ locals {
         vm_command                 = job.vm_command
         disabled                  = lookup(job, "disabled", false) # ✅ optional default
         rgn_vm                    = schedule.common_params.rgn_vm
-        azure_subscription_id      = schedule.common_params.azure_subscription_id
-        action                    = schedule.common_params.action
+        azure_subscription_id     = schedule.common_params.azure_subscription_id
+        action_script             = schedule.common_params.action_script
         automation_account_name   = schedule.common_params.automation_account_name
         resource_group_name       = schedule.common_params.resource_group_name
         runbook_name              = schedule.common_params.runbook_name
@@ -41,7 +41,7 @@ resource "azurerm_automation_job_schedule" "hadley_resource" {
     vm_command            = each.value.vm_command
     rgn_vm                = each.value.rgn_vm
     azure_subscription_id = each.value.azure_subscription_id
-    action                = each.value.action
+    action_script         = each.value.action_script
   }
 }
 

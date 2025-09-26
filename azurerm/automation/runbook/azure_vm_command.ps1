@@ -61,12 +61,12 @@ param(
     [Parameter(Mandatory = $true)]
     [ValidateSet("Start", "Stop")]
     # Specify desired Action, allowed values "Start" or "Stop"
-    $action
+    $action_script
 )
 
 
 
-Write-Output $vm_name, $vm_command, $rgn_vm, $azure_subscription_id, $action
+Write-Output $vm_name, $vm_command, $rgn_vm, $azure_subscription_id, $action_script
 Write-Output "Script started at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
 $errorCount = 0
@@ -130,8 +130,8 @@ catch {
 
 
 
-Write-Output "Applying $action in the vm $vm_name ...."
-switch ($action) {
+Write-Output "Applying $action_script in the vm $vm_name ...."
+switch ($action_script) {
     "Start" {
         # Start the VM
         try {
