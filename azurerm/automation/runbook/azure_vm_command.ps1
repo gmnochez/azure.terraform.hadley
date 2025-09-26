@@ -132,34 +132,8 @@ switch ($action_script) {
             }
             
             Write-Output "Executing command in VM : $vm_command..."
-            #$result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
-            
-
-            $attempt = 0
-            $MaxRetries = 5
-            $DelaySeconds = 2
-            $success = $false
-
-            while (-not $success -and $attempt -lt $MaxRetries) {
-                try {
-                    Write-Output "Attempt $($attempt + 1): Running command '$vm_command' on VM '$vm_name'..."
-                    $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
-                    Write-Output "Command executed successfully on VM '$vm_name'."
-                    #Write-Output $result.value.Message  
-                    foreach ($entry in $result.Value) {
-                        Write-Output $entry.Message
-                    }
-
-                    $success = $true
-                    $attempt++
-                }
-                catch {
-                    $ErrorMessage = $_.Exception.Message
-                    Write-Error "Error starting the VM $($VM.Name): $ErrorMessage"
-                    Start-Sleep -Seconds $DelaySeconds
-                    $attempt++
-                }
-            }
+            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
+            Write-Output $result.value.Message  
 
         }
         catch {
