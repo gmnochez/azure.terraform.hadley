@@ -154,13 +154,32 @@ catch {
 
 
 
+try {
+    # Get VM with status
+    $vmStatus = Get-AzVM -ResourceGroupName $rgn_vm -Name $vm_name -Status
+    # Extract power state
+    $powerState = ($vmStatus.Statuses | Where-Object { $_.Code -like 'PowerState/*' }).DisplayStatus
+catch {
+    Write-Error "Error processing VM '$vm_name': $($_.Exception.Message)"
+}
+
+
+
+
+
 
 switch ($action_script) {
     "Start" {
         # Start the VM
         try {
-            Write-Output "Starting VM $($VM.Name)..."
-            $null = $VM | Start-AzVM -ErrorAction Stop -NoWait
+            if ($powerState -eq 'VM running') {
+                Write-Output "VM '$vm_name' is already running. No action needed."
+            } else {
+                Write-Output "Starting VM $($VM.Name)..."
+                $null = $VM | Start-AzVM -ErrorAction Stop -NoWait
+            }
+            
+            Write-Output "Executing command in VM : $vm_command..."
             $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
             Write-Output $result.value.Message    
         }
@@ -175,10 +194,16 @@ switch ($action_script) {
     "Stop" {
         # Stop the VM
         try {
-            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
-            Write-Output $result.value.Message  
-            Write-Output "Stopping VM $($VM.Name)..."
-            $null = $VM | Stop-AzVM -ErrorAction Stop -Force -NoWait
+            if ($powerState -eq 'VM running') {
+                Write-Output "Executing command in VM : $vm_command..."
+                $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
+                Write-Output $result.value.Message  
+                Write-Output "Stopping VM $($VM.Name)..."
+                $null = $VM | Stop-AzVM -ErrorAction Stop -Force -NoWait
+                
+            } else {
+                Write-Output "VM '$vm_name' is already stopped. No action needed."
+            }
                 
         }
         catch {
