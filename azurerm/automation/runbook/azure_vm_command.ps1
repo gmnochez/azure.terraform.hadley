@@ -177,10 +177,10 @@ switch ($action_script) {
             Write-Output "Executing command in VM : $vm_command..."
             #$result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId $commandType -ScriptString $vm_command
             
-            $result = Invoke-VMRunCommandWithRetry -ResourceGroupName $rgn_vm -VMName $vm_name -CommandId $commandType -ScriptString @($vm_command) -MaxRetries 5 -DelaySeconds 10
+            #$result = Invoke-VMRunCommandWithRetry -ResourceGroupName $rgn_vm -VMName $vm_name -CommandId $commandType -ScriptString @($vm_command) -MaxRetries 5 -DelaySeconds 10
             
             
-            Write-Output $result.value.Message    
+            #Write-Output $result.value.Message    
         }
         catch {
             $ErrorMessage = $_.Exception.message
