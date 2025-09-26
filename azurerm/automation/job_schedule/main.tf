@@ -11,6 +11,12 @@ locals {
         resource_group_name       = schedule.common_params.resource_group_name
         runbook_name              = schedule.common_params.runbook_name
         schedule_name             = schedule.common_params.schedule_name
+        name                      = schedule.schedule_params.name
+        frequency                 = schedule.schedule_params.frequency
+        interval                  = schedule.schedule_params.interval
+        timezone                  = schedule.schedule_params.timezone
+        start_time                = schedule.schedule_params.start_time
+        description               = schedule.schedule_params.description
         
       }
     ]
@@ -35,3 +41,16 @@ resource "azurerm_automation_job_schedule" "jobs" {
   }
 }
 
+
+resource "azurerm_automation_schedule" "hadley_resource" {
+  for_each = { for idx, job in local.flattened_jobs : "${job.job_name}" => job }
+  name                      = "${each.value.schedule_name}_${each.value.VMName}"
+  resource_group_name       = each.value.resource_group_name
+  automation_account_name   = each.value.automation_account_name
+  frequency                 = each.value.frequency
+  interval                  = each.value.interval
+  timezone                  = each.value.timezone
+  start_time                = each.value.start_time
+  description               = each.value.description
+
+}
