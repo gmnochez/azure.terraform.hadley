@@ -4,6 +4,7 @@ locals {
       for job_key, job in schedule.jobs : {
         VMName                    = job.VMName
         VMcommand                 = job.VMcommand
+        disabled                  = lookup(job, "disabled", false) # ✅ optional default
         ResourceGroupName         = schedule.common_params.ResourceGroupName
         AzureSubscriptionID       = schedule.common_params.AzureSubscriptionID
         Action                    = schedule.common_params.Action
@@ -24,7 +25,11 @@ locals {
 
 
 resource "azurerm_automation_job_schedule" "hadley_resource" {
-  for_each = { for idx, job in local.flattened_jobs : "${job.VMName}" => job }
+  for_each = {
+    for idx, job in local.flattened_jobs :
+    "${job.VMName}" => job
+    if !job.disabled                      # ✅ skip if disabled = true
+  }
 
   automation_account_name = each.value.automation_account_name
   resource_group_name     = each.value.resource_group_name
