@@ -2,9 +2,9 @@ locals {
   flattened_jobs = flatten([
     for schedule in var.automation_job_schedules : [
       for job_key, job in schedule.jobs : {
-        vm_name                    = job.vm_name
-        vm_command                 = job.vm_command
-        disabled                  = lookup(job, "disabled", false) # ✅ optional default
+        vm_name                   = job.vm_name
+        vm_command                = job.vm_command
+        disabled                  = job.disabled
         rgn_vm                    = schedule.common_params.rgn_vm
         azure_subscription_id     = schedule.common_params.azure_subscription_id
         action_script             = schedule.common_params.action_script
