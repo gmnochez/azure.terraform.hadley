@@ -24,7 +24,7 @@ locals {
 }
 
 
-resource "azurerm_automation_job_schedule" "jobs" {
+resource "azurerm_automation_job_schedule" "hadley_resource" {
   for_each = { for idx, job in local.flattened_jobs : "${job.job_name}" => job }
 
   automation_account_name = each.value.automation_account_name
