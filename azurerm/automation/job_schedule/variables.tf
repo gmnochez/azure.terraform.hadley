@@ -22,6 +22,7 @@ variable "automation_job_schedules" {
     jobs = map(object({
       vm_name    = string
       vm_command = string
+      disabled   = bool
     }))
   }))
 }
