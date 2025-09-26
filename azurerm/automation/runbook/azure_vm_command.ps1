@@ -118,7 +118,7 @@ if ([string]::IsNullOrEmpty($AzContext.Subscription)) {
 
 try {
     # get only the specified VM
-    $VM = Get-AzVM -resource_group_name $rgn_vm -vm_name $vm_name
+    $VM = Get-AzVM -ResourceGroupName $rgn_vm -Name $vm_name
     Write-Output "Getting VM....  $($VM.Name)"
 }
 catch {
@@ -137,7 +137,7 @@ switch ($action_script) {
         try {
             Write-Output "Starting VM $($VM.Name)..."
             $null = $VM | Start-AzVM -ErrorAction Stop -NoWait
-            $result = Invoke-AzVMRunCommand -resource_group_name $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
+            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
             Write-Output $result.value.Message    
         }
         catch {
@@ -151,7 +151,7 @@ switch ($action_script) {
     "Stop" {
         # Stop the VM
         try {
-            $result = Invoke-AzVMRunCommand -resource_group_name $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
+            $result = Invoke-AzVMRunCommand -ResourceGroupName $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
             Write-Output $result.value.Message  
             Write-Output "Stopping VM $($VM.Name)..."
             $null = $VM | Stop-AzVM -ErrorAction Stop -Force -NoWait
