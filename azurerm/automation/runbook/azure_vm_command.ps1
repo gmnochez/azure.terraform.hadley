@@ -1,3 +1,8 @@
+# -------------------------------
+# 1. Function Definitions
+# -------------------------------
+
+
 function Invoke-VMRunCommandWithRetry {
     param (
         [string]$ResourceGroupName,
@@ -42,56 +47,9 @@ function Invoke-VMRunCommandWithRetry {
     throw "Failed to run command on VM '$VMName' after $MaxRetries attempts. Last error: $($lastError.Exception.Message)"
 }
 
-
-
-
-<#
-.SYNOPSIS
- Script to start or stop Azure VMs with Azure Automation. 
-.DESCRIPTION
- This script is intended to start or stop Azure Virtual Machines in a simple way in Azure Automation.
- The script uses Azure Automation Managed Identity and the modern ("Az") Azure PowerShell Module.
-    
- Requirements:
- Give the Azure Automation Managed Identity necessary rights to Start/Stop VMs in the Resource Group.
- You can create a custom role for this purpose with the following permissions: 
-   - Microsoft.Compute/virtualMachines/deallocate/action
-   - Microsoft.Compute/virtualMachines/start/action
-   - Microsoft.Compute/virtualMachines/read
-.NOTES
-  Version:        1.2.0
-  Author:         Andreas Dieckmann
-  Creation Date:  2022-03-11
-  GitHub:         https://github.com/diecknet/Simple-Azure-VM-Start-Stop
-  Blog:           https://diecknet.de
-  License:        MIT License
-  Copyright (c) 2022 Andreas Dieckmann
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  SOFTWARE.
-  
-.LINK 
-  https://diecknet.de/
-.LINK
-  https://github.com/diecknet/Simple-Azure-VM-Start-Stop
-.INPUTS
-    None
-.OUTPUTS
-    String to determine result of the script executed
-#>
-
+# -------------------------------
+# 2. Parameters
+# -------------------------------
 
 param(
     [Parameter(Mandatory = $true)]
@@ -110,7 +68,9 @@ param(
     $action_script
 )
 
-
+# -------------------------------
+# 3. Main Script Logic
+# -------------------------------
 
 Write-Output $vm_name, $vm_command, $rgn_vm, $azure_subscription_id, $action_script
 Write-Output "Script started at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
