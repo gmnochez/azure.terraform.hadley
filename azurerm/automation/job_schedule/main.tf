@@ -3,7 +3,7 @@ locals {
     for schedule in var.automation_job_schedules : [
       for job_key, job in schedule.jobs : {
         vm_name                    = job.vm_name
-        vm_command                 = job.vm_name
+        vm_command                 = job.vm_command
         disabled                  = lookup(job, "disabled", false) # ✅ optional default
         rgn_vm                    = schedule.common_params.rgn_vm
         azure_subscription_id      = schedule.common_params.azure_subscription_id
@@ -47,7 +47,14 @@ resource "azurerm_automation_job_schedule" "hadley_resource" {
 
 
 resource "azurerm_automation_schedule" "hadley_resource" {
-  for_each = { for idx, job in local.flattened_jobs : "${job.vm_name}" => job }
+  for_each = {
+    for idx, job in local.flattened_jobs :
+    "${job.vm_name}" => job
+    if !job.disabled                      # ✅ skip if disabled = true
+  }
+
+
+
   name                      = "${each.value.schedule_name}_${each.value.vm_name}"
   resource_group_name       = each.value.resource_group_name
   automation_account_name   = each.value.automation_account_name
