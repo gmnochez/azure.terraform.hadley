@@ -13,5 +13,9 @@ variable "automation_accounts" {
  
 }
 
-
+variable "tags" {
+  description = "Lista de Tags"
+  type = list(any)
+  default = []
+}
 
