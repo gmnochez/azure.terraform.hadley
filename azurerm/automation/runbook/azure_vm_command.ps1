@@ -159,7 +159,7 @@ try {
     $vmStatus = Get-AzVM -ResourceGroupName $rgn_vm -Name $vm_name -Status
     # Extract power state
     $powerState = ($vmStatus.Statuses | Where-Object { $_.Code -like 'PowerState/*' }).DisplayStatus
-catch {
+}catch {
     Write-Error "Error processing VM '$vm_name': $($_.Exception.Message)"
 }
 
