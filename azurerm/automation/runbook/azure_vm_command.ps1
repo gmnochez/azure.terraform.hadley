@@ -46,6 +46,52 @@
 #>
 
 
+function Invoke-VMRunCommandWithRetry {
+    param (
+        [string]$ResourceGroupName,
+        [string]$VMName,
+        [string]$CommandId,
+        [string[]]$ScriptString,
+        [int]$MaxRetries = 5,
+        [int]$DelaySeconds = 15
+    )
+
+    $attempt = 0
+    $success = $false
+    $lastError = $null
+
+    while (-not $success -and $attempt -lt $MaxRetries) {
+        try {
+            Write-Output "Attempt $($attempt + 1): Running command '$CommandId' on VM '$VMName'..."
+            $result = Invoke-AzVMRunCommand `
+                -ResourceGroupName $ResourceGroupName `
+                -Name $VMName `
+                -CommandId $CommandId `
+                -ScriptString $ScriptString `
+                -ErrorAction Stop
+
+            Write-Output "Command executed successfully on VM '$VMName'."
+            $success = $true
+            return $result
+        }
+        catch {
+            $lastError = $_
+            if ($_.Exception.Message -like "*Run command extension execution is in progress*") {
+                Write-Warning "RunCommand is still in progress on VM '$VMName'. Retrying in $DelaySeconds seconds..."
+                Start-Sleep -Seconds $DelaySeconds
+                $attempt++
+            } else {
+                throw $_  # Unexpected error — rethrow
+            }
+        }
+    }
+
+    # If failed after all retries
+    throw "Failed to run command on VM '$VMName' after $MaxRetries attempts. Last error: $($lastError.Exception.Message)"
+}
+
+
+
 
 param(
     [Parameter(Mandatory = $true)]
@@ -225,46 +271,3 @@ Write-Output $endOfScriptText
 
 
 
-function Invoke-VMRunCommandWithRetry {
-    param (
-        [string]$ResourceGroupName,
-        [string]$VMName,
-        [string]$CommandId,
-        [string[]]$ScriptString,
-        [int]$MaxRetries = 5,
-        [int]$DelaySeconds = 15
-    )
-
-    $attempt = 0
-    $success = $false
-    $lastError = $null
-
-    while (-not $success -and $attempt -lt $MaxRetries) {
-        try {
-            Write-Output "Attempt $($attempt + 1): Running command '$CommandId' on VM '$VMName'..."
-            $result = Invoke-AzVMRunCommand `
-                -ResourceGroupName $ResourceGroupName `
-                -Name $VMName `
-                -CommandId $CommandId `
-                -ScriptString $ScriptString `
-                -ErrorAction Stop
-
-            Write-Output "Command executed successfully on VM '$VMName'."
-            $success = $true
-            return $result
-        }
-        catch {
-            $lastError = $_
-            if ($_.Exception.Message -like "*Run command extension execution is in progress*") {
-                Write-Warning "RunCommand is still in progress on VM '$VMName'. Retrying in $DelaySeconds seconds..."
-                Start-Sleep -Seconds $DelaySeconds
-                $attempt++
-            } else {
-                throw $_  # Unexpected error — rethrow
-            }
-        }
-    }
-
-    # If failed after all retries
-    throw "Failed to run command on VM '$VMName' after $MaxRetries attempts. Last error: $($lastError.Exception.Message)"
-}
