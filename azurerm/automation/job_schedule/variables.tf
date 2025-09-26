@@ -15,13 +15,13 @@ variable "automation_job_schedules" {
       automation_account_name   = string
       resource_group_name       = string
       runbook_name              = string
-      ResourceGroupName         = string
-      AzureSubscriptionID       = string
-      Action                    = string
+      rgn_vm                    = string
+      azure_subscription_id     = string
+      action                    = string
     })
     jobs = map(object({
-      VMName    = string
-      VMcommand = string
+      vm_name    = string
+      vm_command = string
     }))
   }))
 }

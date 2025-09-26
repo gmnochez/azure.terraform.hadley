@@ -50,23 +50,23 @@
 param(
     [Parameter(Mandatory = $true)]
     # Specify the name of the Virtual Machine, or use the asterisk symbol "*" to affect all VMs in the resource group
-    $VMName,
+    $vm_name,
     [Parameter(Mandatory = $true)]
-    $VMcommand,
+    $vm_command,
     [Parameter(Mandatory = $true)]
-    $ResourceGroupName,
+    $rgn_vm,
     [Parameter(Mandatory = $false)]
     # Optionally specify Azure Subscription ID
-    $AzureSubscriptionID,
+    $azure_subscription_id,
     [Parameter(Mandatory = $true)]
     [ValidateSet("Start", "Stop")]
     # Specify desired Action, allowed values "Start" or "Stop"
-    $Action
+    $action
 )
 
 
 
-Write-Output $VMName, $VMcommand, $ResourceGroupName, $AzureSubscriptionID, $Action
+Write-Output $vm_name, $vm_command, $rgn_vm, $azure_subscription_id, $action
 Write-Output "Script started at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
 $errorCount = 0
@@ -84,13 +84,13 @@ catch {
 }
 
 # select Azure subscription by ID if specified, suppress output
-if ($AzureSubscriptionID) {
+if ($azure_subscription_id) {
     try {
-        $null = Select-AzSubscription -SubscriptionID $AzureSubscriptionID
+        $null = Select-AzSubscription -SubscriptionID $azure_subscription_id
         Write-Output "Assign Subscription"    
     }
     catch {
-        $ErrorMessage = "Error selecting Azure Subscription ($AzureSubscriptionID): " + $_.Exception.message
+        $ErrorMessage = "Error selecting Azure Subscription ($azure_subscription_id): " + $_.Exception.message
         Write-Error $ErrorMessage
         throw $ErrorMessage
         exit
@@ -118,11 +118,11 @@ if ([string]::IsNullOrEmpty($AzContext.Subscription)) {
 
 try {
     # get only the specified VM
-    $VM = Get-AzVM -ResourceGroupName $ResourceGroupName -VMName $VMName
+    $VM = Get-AzVM -resource_group_name $rgn_vm -vm_name $vm_name
     Write-Output "Getting VM....  $($VM.Name)"
 }
 catch {
-    $ErrorMessage = "Error getting VM ($VMName) from resource group ($ResourceGroupName): " + $_.Exception.message
+    $ErrorMessage = "Error getting VM ($vm_name) from resource group ($rgn_vm): " + $_.Exception.message
     Write-Error $ErrorMessage
     throw $ErrorMessage
     exit
@@ -130,14 +130,14 @@ catch {
 
 
 
-Write-Output "Applying $Action in the vm $VMName ...."
-switch ($Action) {
+Write-Output "Applying $action in the vm $vm_name ...."
+switch ($action) {
     "Start" {
         # Start the VM
         try {
             Write-Output "Starting VM $($VM.Name)..."
             $null = $VM | Start-AzVM -ErrorAction Stop -NoWait
-            $result = Invoke-AzVMRunCommand -ResourceGroupName $ResourceGroupName -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $VMCommand
+            $result = Invoke-AzVMRunCommand -resource_group_name $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
             Write-Output $result.value.Message    
         }
         catch {
@@ -151,7 +151,7 @@ switch ($Action) {
     "Stop" {
         # Stop the VM
         try {
-            $result = Invoke-AzVMRunCommand -ResourceGroupName $ResourceGroupName -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $VMCommand
+            $result = Invoke-AzVMRunCommand -resource_group_name $rgn_vm -Name $VM.Name -CommandId 'RunShellScript' -ScriptString $vm_command
             Write-Output $result.value.Message  
             Write-Output "Stopping VM $($VM.Name)..."
             $null = $VM | Stop-AzVM -ErrorAction Stop -Force -NoWait
