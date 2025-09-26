@@ -137,7 +137,7 @@ switch ($action_script) {
 
             $attempt = 0
             $MaxRetries = 5
-            $DelaySeconds = 5
+            $DelaySeconds = 2
 
             while (-not $success -and $attempt -lt $MaxRetries) {
                 try {
@@ -150,6 +150,7 @@ switch ($action_script) {
                     $ErrorMessage = $_.Exception.Message
                     Write-Error "Error starting the VM $($VM.Name): $ErrorMessage"
                     Start-Sleep -Seconds $DelaySeconds
+                    $attempt++
                 }
             }
 
