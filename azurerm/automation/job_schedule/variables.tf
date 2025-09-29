@@ -21,9 +21,10 @@ variable "automation_job_schedules" {
       action_script             = string
     })
     jobs = map(object({
-      vm_name    = string
-      vm_command = string
-      disabled   = bool
+      vm_name             = string
+      full_schedule_name  = string
+      vm_command          = string
+      disabled            = bool
     }))
   }))
 }
