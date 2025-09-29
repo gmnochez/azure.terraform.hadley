@@ -13,6 +13,7 @@ locals {
         runbook_name              = schedule.common_params.runbook_name
         schedule_name             = schedule.schedule_params.schedule_name
         frequency                 = schedule.schedule_params.frequency
+        week_days                 = schedule.schedule_params.week_days
         interval                  = schedule.schedule_params.interval
         timezone                  = schedule.schedule_params.timezone
         start_time                = schedule.schedule_params.start_time
@@ -36,6 +37,7 @@ resource "azurerm_automation_schedule" "hadley_resource" {
   resource_group_name       = each.value.resource_group_name
   automation_account_name   = each.value.automation_account_name
   frequency                 = each.value.frequency
+  week_days                 = each.value.week_days
   interval                  = each.value.interval
   timezone                  = each.value.timezone
   start_time                = each.value.start_time

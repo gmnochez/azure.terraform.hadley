@@ -5,6 +5,7 @@ variable "automation_job_schedules" {
     schedule_params = object({
       schedule_name                   = string
       frequency                       = string
+      week_days                       = list(string)
       interval                        = number
       timezone                        = string
       start_time                      = string
