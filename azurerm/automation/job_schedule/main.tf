@@ -2,7 +2,7 @@ locals {
   flattened_jobs = flatten([
     for schedule in var.automation_job_schedules : [
       for job_key, job in schedule.jobs : {
-        vm_name                   = job.vm_name
+        vm_name                   = "${job.vm_name}_${schedule.common_params.action_script}"
         vm_command                = job.vm_command
         disabled                  = job.disabled
         rgn_vm                    = schedule.common_params.rgn_vm
