@@ -55,7 +55,14 @@ resource "azurerm_virtual_machine" "hadley_resource" {
     }
   }
 
-  
+  dynamic "plan" {
+    for_each = var.plan != null ? [var.plan] : []
+    content {
+      name      = plan.value.name
+      publisher = plan.value.publisher
+      product   = plan.value.product
+    }
+  }
 
   storage_os_disk{
 

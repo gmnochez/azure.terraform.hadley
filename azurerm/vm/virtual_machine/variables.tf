@@ -95,4 +95,12 @@ variable "tags" {
 }
 
 
-
+variable "plan" {
+  description = "Plan de marketplace (opcional)"
+  type = object({
+    name      = string
+    publisher = string
+    product   = string
+  })
+  default = null
+}
