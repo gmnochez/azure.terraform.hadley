@@ -25,9 +25,22 @@ data "azurerm_storage_account" "storage" {
 }
 
 
+resource "azurerm_marketplace_agreement" "this" {
+  count = var.plan != null ? 1 : 0
+
+  publisher = var.plan.publisher
+  offer     = var.plan.product
+  plan      = var.plan.name
+}
+
 
 # Create virtual machine 
 resource "azurerm_virtual_machine" "hadley_resource" {
+  depends_on = var.plan != null ? [
+    azurerm_marketplace_agreement.this
+  ] : []
+
+
   name                              = var.name
   location                          = var.location
   resource_group_name               = var.resource_group_name
