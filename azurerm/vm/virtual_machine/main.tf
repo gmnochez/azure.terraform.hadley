@@ -36,9 +36,9 @@ resource "azurerm_marketplace_agreement" "this" {
 
 # Create virtual machine 
 resource "azurerm_virtual_machine" "hadley_resource" {
-  depends_on = var.plan != null ? [
+  depends_on = [
     azurerm_marketplace_agreement.this
-  ] : []
+  ]
 
 
   name                              = var.name
